@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tradução</title>
+    <style>
+        .conteudo {
+            padding: 1em;
+            border: 2px solid #000000;
+            margin-bottom: 1em;
+        }
+
+        #idiomas {
+            display: flex;
+            padding: 10px;
+            justify-content: flex-end;
+        }
+
+        img {
+            width: 60px;
+            height: auto;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body onload="Escolher('ptbr')">
+    <div id="idiomas">
+        <img src="img/bandeira_americana_bb.webp" onclick="Escolher('en')"></img>
+        <img src="img/bandeira-do-brasil-og.webp" onclick="Escolher('ptbr')"></img>
+        <img src="img/espanha.png" onclick="Escolher('es')"></img>
+    </div>
+
+    <div class="conteudo" id="paragrafo1"></div>
+    <div class="conteudo" id="paragrafo2"></div>
+    <div class="conteudo" id="paragrafo3"></div>
+    <div class="conteudo" id="paragrafo4"></div>
+    <div class="conteudo" id="paragrafo5"></div>
+
+    <script>
+        function Escolher(idioma) {
+            fetch(`textos_${idioma}.json`)
+            .then(resposta => resposta.json())
+            .then(texto => {
+                document.getElementById('paragrafo1').innerText = texto.paragrafo1;
+                document.getElementById('paragrafo2').innerText = texto.paragrafo2;
+                document.getElementById('paragrafo3').innerText = texto.paragrafo3;
+                document.getElementById('paragrafo4').innerText = texto.paragrafo4; // Corrigido o ID
+                document.getElementById('paragrafo5').innerText = texto.paragrafo5; // Corrigido o ID
+            })
+            .catch(error => console.error('Erro buscando textos:', error));
+        }
+    </script>
+</body>
+</html>
+
